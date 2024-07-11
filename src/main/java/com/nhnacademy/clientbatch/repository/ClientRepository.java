@@ -18,8 +18,8 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             "WHERE client_id IN (" +
             "    SELECT client_id FROM (" +
             "        SELECT client_id FROM client " +
-//            "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 90 " +
-            "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 1 " +
+            "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 90 " +
+//            "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 1 " +
             "          AND is_deleted = false " +
             "        LIMIT 10000" +
             "    ) AS subquery)",
