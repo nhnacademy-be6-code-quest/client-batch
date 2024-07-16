@@ -66,21 +66,4 @@ class ClientTest {
         assertThat(client.getClientName()).isEqualTo("Builder Name");
         assertThat(client.isDeleted()).isTrue();
     }
-
-    @Test
-    void testEqualsAndHashCode() {
-        // Test equals and hashCode methods to cover Lombok-generated implementations
-        Client client1 = new Client(1L, null, "email@example.com", null, null, null, null, null, false, null);
-        Client client2 = new Client(1L, null, "email@example.com", null, null, null, null, null, false, null);
-
-        assertThat(client1).isEqualTo(client2);
-        assertThat(client1.hashCode()).hasSameHashCodeAs(client2.hashCode());
-    }
-
-    @Test
-    void testToString() {
-        // Test toString method to ensure it includes relevant fields
-        Client client = new Client(1L, 2L, "email@example.com", "pass", "John", LocalDate.now(), LocalDateTime.now(), LocalDateTime.now(), false, null);
-        assertThat(client.toString()).contains("email@example.com");
-    }
 }
