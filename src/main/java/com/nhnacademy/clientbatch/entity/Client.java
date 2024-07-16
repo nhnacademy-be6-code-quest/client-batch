@@ -15,9 +15,7 @@ public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long clientId;
-    @ManyToOne
-    @JoinColumn(name = "clientGradeId")
-    private ClientGrade clientGrade;
+    private Long clientGradeId;
     private String clientEmail;
     private String clientPassword;
     private String clientName;

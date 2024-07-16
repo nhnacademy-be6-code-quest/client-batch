@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    Client findByClientEmail(String clientEmail);
 
     @Modifying
     @Transactional
@@ -19,7 +18,6 @@ public interface ClientRepository extends JpaRepository<Client, Long> {
             "    SELECT client_id FROM (" +
             "        SELECT client_id FROM client " +
             "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 90 " +
-//            "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 1 " +
             "          AND is_deleted = false " +
             "        LIMIT 10000" +
             "    ) AS subquery)",
