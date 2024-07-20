@@ -10,7 +10,6 @@ import java.time.LocalDateTime;
 @Setter
 @Entity
 @Builder
-@NoArgsConstructor
 @AllArgsConstructor
 public class Client {
     @Id
@@ -25,4 +24,7 @@ public class Client {
     private LocalDateTime lastLoginDate;
     private boolean isDeleted;
     private LocalDateTime clientDeleteDate;
+
+    protected Client() {
+    }
 }
