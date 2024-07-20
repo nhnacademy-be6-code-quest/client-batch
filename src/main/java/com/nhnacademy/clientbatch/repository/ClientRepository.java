@@ -9,14 +9,19 @@ import org.springframework.transaction.annotation.Transactional;
 
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    Client findByClientEmail(String clientEmail);
 
     @Modifying
     @Transactional
-    @Query(value = "UPDATE client SET is_deleted = true, client_delete_date = CURRENT_TIMESTAMP WHERE client_id IN (" +
-            "SELECT client_id FROM (" +
-            "SELECT client_id FROM client WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 90 LIMIT 10000" +
-            ") AS subquery)", nativeQuery = true)
+    @Query(value = "UPDATE client " +
+            "SET is_deleted = true, client_delete_date = CURRENT_TIMESTAMP " +
+            "WHERE client_id IN (" +
+            "    SELECT client_id FROM (" +
+            "        SELECT client_id FROM client " +
+            "        WHERE DATEDIFF(CURRENT_TIMESTAMP(), last_login_date) > 90 " +
+            "          AND is_deleted = false " +
+            "        LIMIT 10000" +
+            "    ) AS subquery)",
+            nativeQuery = true)
     int updateClientIsDeletedIfInactive();
 
 }
